@@ -1,39 +1,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>testAutomation2</groupId>
-	<artifactId>testAutomation2</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<groupId>com.perfecttest.allure</groupId>
+	<artifactId>alluretest</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>alluretest</name>
+	<url>http://maven.apache.org</url>
 	<properties>
+		<allure.version>1.4.14</allure.version>
 		<aspectj.version>1.7.4</aspectj.version>
 	</properties>
-
 	<dependencies>
-	<!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
-<dependency>
-    <groupId>io.qameta.allure</groupId>
-    <artifactId>allure-testng</artifactId>
-    <version>2.0-BETA3</version>
-</dependency>
-
+	<dependency>
+		<groupId>ru.yandex.qatools.allure</groupId>
+		<artifactId>allure-junit-adaptor</artifactId>
+		<version>${allure.version}</version>
+	</dependency>
 	</dependencies>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.14</version>
 				<configuration>
-					<testFailureIgnore>false</testFailureIgnore>
+					<argLine>
+						-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver${aspectj.version}.jar
+					</argLine>
 					<properties>
 						<property>
 							<name>listener</name>
@@ -41,6 +35,7 @@
 						</property>
 					</properties>
 				</configuration>
+
 				<dependencies>
 					<dependency>
 						<groupId>org.aspectj</groupId>
@@ -49,32 +44,18 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.7.0</version>
-				<configuration>
-					<release>9</release>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 	<reporting>
-
 		<excludeDefaults>true</excludeDefaults>
-
 		<plugins>
-
 			<plugin>
-
-				<groupId>io.qameta.allure</groupId>
-
-				<artifactId>allure-maven</artifactId>
-
-				<version>2.9</version>
-
+				<groupId>ru.yandex.qatools.allure</groupId>
+				<artifactId>allure-maven-plugin</artifactId>
+				<version>${allure.version}</version>
 			</plugin>
-
 		</plugins>
-
 	</reporting>
+
+
 </project>
