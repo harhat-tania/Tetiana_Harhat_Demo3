@@ -13,7 +13,10 @@ import org.testng.annotations.Test.*;
 
 import testAutomation.HomePage;
 import testAutomation.ReviewPage;
-
+import test.ReviewTest;
+import io.qameta.allure
+@Title("This is our cool test suite")
+@Description("In this cool suite we will test only cool features") 
 public class ReviewTest {
     public static WebDriver driver;
     public static ReviewPage reviewPage;
@@ -33,7 +36,9 @@ public class ReviewTest {
     }
     
     
-    
+
+    @Title("First cool check")     
+    @Description("In this cool test we will check cool thing") 
     @Test
     public void reviewTest() {
 	homePage.clickProductTab();
@@ -70,7 +75,6 @@ public class ReviewTest {
 	Assert.assertEquals(chekResult, rewiewMassegeWarning);
 
     }
-
   
     @Test
     public void reviewTestNotRaiting() {
@@ -90,5 +94,12 @@ public class ReviewTest {
     @AfterClass
     public static void tearDown() {
 	driver.quit();
+    }
+
+
+
+    public void onTestSuccess() {
+	// TODO Auto-generated method stub
+	
     }
 }
